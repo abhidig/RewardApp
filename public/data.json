@@ -1,0 +1,192 @@
+
+[
+  {
+    "customerId":"C001",
+    "name": "Ajay",
+    "date": "2025-01-01",
+    "month": "Jan",
+    "product": "Product A",
+    "amount": 120,
+    "transactionId":"T001"
+  },
+  {
+    "customerId": "C002",
+    "name": "Paresh",
+    "date": "2025-02-15",
+    "month": "Feb",
+    "product": "Product B",
+    "amount": 200,
+    "transactionId":"T002"
+  },
+  {
+    "customerId": "C003",
+    "name": "Subhash",
+    "date": "2025-03-10",
+    "month": "March",
+    "product": "Product C",
+    "amount": 60,
+    "transactionId":"T003"
+  },
+  {
+    "customerId": "C004",
+    "name": "Subhash",
+    "date": "2025-01-20",
+    "month": "Jan",
+    "product": "Product D",
+    "amount": 60,
+    "transactionId":"T004"
+  },
+  {
+    "customerId": "C005",
+    "name": "Suresh",
+    "date": "2025-02-25",
+    "month": "Feb",
+    "product": "Product E",
+    "amount": 110,
+    "transactionId":"T005"
+  },
+  {
+    "customerId": "C006",
+    "name": "Dilip",
+    "date": "2025-03-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 90.5,
+    "transactionId":"T006"
+  },
+  {
+    "customerId": "C007",
+    "name": "Devid",
+    "date": "2025-02-25",
+    "month": "Feb",
+    "product": "Product E",
+    "amount": 110,
+    "transactionId":"T007"
+  },
+  {
+    "customerId": "C008",
+    "name": "Suresh",
+    "date": "2024-03-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 90.5,
+    "transactionId":"T008"
+  }, {
+    "customerId": "C009",
+    "name": "Mark",
+    "date": "2024-11-25",
+    "month": "Feb",
+    "product": "Product E",
+    "amount": 110.7,
+    "transactionId":"T009"
+  },
+  {
+    "customerId": "C021",
+    "name": "Steve",
+    "date": "2024-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 120,
+    "transactionId":"T010"
+  },
+  {
+    "customerId": "C010",
+    "name": "Joe",
+    "date": "2025-01-05",
+    "month": "March",
+    "product": "Product D",
+    "amount": 40,
+    "transactionId":"T011"
+  },
+  {
+    "customerId": "C011",
+    "name": "Devid",
+    "date": "2025-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 76,
+    "transactionId":"T012"
+  },
+  {
+    "customerId": "C012",
+    "name": "Jack",
+    "date": "2025-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 65,
+    "transactionId":"T013"
+  },
+  {
+    "customerId": "C013",
+    "name": "Alex",
+    "date": "2025-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 78,
+    "transactionId":"T014"
+  },
+  {
+    "customerId": "C014",
+    "name": "John",
+    "date": "2025-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 76.20,
+    "transactionId":"T015"
+  },
+  {
+    "customerId": "C015",
+    "name": "Mike",
+    "date": "2025-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 82.20,
+    "transactionId":"T016"
+  },
+  {
+    "customerId": "C016",
+    "name": "William",
+    "date": "2024-06-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 90.20,
+    "transactionId":"T017"
+  },
+  {
+    "customerId": "C017",
+    "name": "Nikey",
+    "date": "2025-06-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 100.20,
+    "transactionId":"T018"
+  },
+  {
+    "customerId": "C018",
+    "name": "Adam",
+    "date": "2024-05-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 110.20,
+    "transactionId":"T019"
+  },
+  {
+    "customerId": "C019",
+    "name": "Bob",
+    "date": "2025-05-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 120.20,
+    "transactionId":"T020"
+  },
+  {
+    "customerId": "C020",
+    "name": "Tim",
+    "date": "2024-01-05",
+    "month": "March",
+    "product": "Product F",
+    "amount": 130.20,
+    "transactionId":"T021"
+  }
+  
+]
