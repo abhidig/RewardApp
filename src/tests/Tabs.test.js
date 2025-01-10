@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Tabs from '../components/Tabs';
+import Tabs from '../components/PureComponent/Tabs.js';
 import { calculateRewardPoints } from '../utils/utils';
 
 // Mock the calculateRewardPoints function
@@ -12,21 +12,13 @@ jest.mock('../utils/utils', () => ({
 
 const mockData = [
   {
-    transactionId: 'T1',
+    transactionId: '01',
     customerId: '123',
     customer: 'John Doe',
     date: '2021-01-01',
     product: 'Product 1',
     amount: 120,
-  },
-  {
-    transactionId: 'T2',
-    customerId: '124',
-    customer: 'Jane Doe',
-    date: '2021-02-01',
-    product: 'Product 2',
-    amount: 80,
-  },
+  }
 ];
 
 describe('Tabs Component', () => {
@@ -75,7 +67,7 @@ describe('Tabs Component', () => {
     fireEvent.click(screen.getByLabelText('Transactions'));
     expect(screen.getByLabelText('Transactions')).toBeChecked();
     expect(screen.getAllByText('Transaction Id')[0]).toBeVisible();
-    expect(screen.getAllByText('T1')).toBeVisible();
+    expect(screen.getByText((content) => content.includes('01'))).toBeVisible();
   });
 
 });

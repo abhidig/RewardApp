@@ -1,4 +1,4 @@
-import Tabs from "./Tabs";
+import Tabs from "./PureComponent/Tabs.js";
 
 function Main() {
   return <Tabs />;

@@ -7,7 +7,7 @@ const calculatePoints = (amount) => {
   if (amount > 50) {
     points += amount - 50;
   }
-  return Math.round(points);
+  return Math.floor(points);
 };
 
 const calculateRewardPoints = (transactions) => {
