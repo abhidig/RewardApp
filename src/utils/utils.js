@@ -15,12 +15,10 @@ const calculateRewardPoints = (transactions) => {
   const monthlyRewards = [];
 
   const currentDate = new Date();
-  const currentMonth = currentDate.toLocaleString("default", { month: "long" });
-  const currentYear = currentDate.getFullYear();
   const threeMonthsAgo = new Date();
   threeMonthsAgo.setMonth(currentDate.getMonth() - 3);
 
-  transactions.forEach(({ id, customerId, name, date, product, amount }) => {
+  transactions.map(({ id, customerId, name, date, product, amount }) => {
     const transactionDate = new Date(date);
     const month = transactionDate.toLocaleString("default", { month: "long" });
     const year = transactionDate.getFullYear();
@@ -30,9 +28,6 @@ const calculateRewardPoints = (transactions) => {
       rewardPoints[customerId] = {
         total: 0,
         monthly: {},
-        yearly: {},
-        currentYear: 0,
-        currentMonth: 0,
       };
     }
     rewardPoints[customerId].total += points;
@@ -45,24 +40,11 @@ const calculateRewardPoints = (transactions) => {
       rewardPoints[customerId].monthly[year][month] = 0;
     }
     rewardPoints[customerId].monthly[year][month] += points;
-
-    if (!rewardPoints[customerId].yearly[year]) {
-      rewardPoints[customerId].yearly[year] = 0;
-    }
-    rewardPoints[customerId].yearly[year] += points;
-
-    if (year === currentYear) {
-      rewardPoints[customerId].currentYear += points;
-    }
-    if (month === currentMonth && year === currentYear) {
-      rewardPoints[customerId].currentMonth += points;
-    }
-
-    monthlyRewards.push({ customerId, name, month, year, points });
+    return monthlyRewards.push({ customerId, name, month, year, points });
   });
 
   // Calculate last three same months' rewards based on different years for the same month
-  Object.keys(rewardPoints).forEach((customerId) => {
+  Object.keys(rewardPoints).map((customerId) => {
     const customerRewards = rewardPoints[customerId];
     let lastThreeMonthsPoints = 0;
     const months = [];
@@ -73,15 +55,12 @@ const calculateRewardPoints = (transactions) => {
       const year = date.getFullYear();
       months.push({ month, year });
     }
-    months.forEach(({ month, year }) => {
-      if (
-        customerRewards.monthly[year] &&
-        customerRewards.monthly[year][month]
-      ) {
-        lastThreeMonthsPoints += customerRewards.monthly[year][month];
+    months.map(({ month, year }) => {
+      if (customerRewards.monthly[year] && customerRewards.monthly[year][month] > 0) {
+         lastThreeMonthsPoints += customerRewards.monthly[year][month];
       }
     });
-    customerRewards.lastThreeMonths = lastThreeMonthsPoints;
+    return customerRewards.lastThreeMonths = lastThreeMonthsPoints;
   });
 
   return { rewardPoints, monthlyRewards };

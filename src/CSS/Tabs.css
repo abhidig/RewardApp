@@ -248,6 +248,18 @@
   text-align: left;
 }
 
+.table {
+  width: 100%;
+  table-layout: auto; /* Allows columns to adjust based on content */
+}
+
+.table td.table-price {
+  text-align: right;
+  width: 150px; /* Adjust the width as needed */
+  max-width: 150px; /* Ensure the column does not grow too large */
+  min-width: 100px; /* Ensure the column does not shrink too small */
+}
+
  
  
  

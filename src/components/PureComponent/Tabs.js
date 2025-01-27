@@ -12,7 +12,9 @@ class Tabs extends PureComponent {
 
   componentDidMount() {
     fetchData()
-      .then((data) => this.setState({ data }))
+      .then((data) => {
+        this.setState({ data });
+      })
       .catch((error) => console.error("Error fetching data:", error));
   }
 
@@ -47,12 +49,10 @@ class Tabs extends PureComponent {
       filter: { ...prevState.filter, [name]: value },
     }));
   };
-
   render() {
     const { activeTab, filteredData, filter } = this.state;
     const { rewardPoints, monthlyRewards } =
       calculateRewardPoints(filteredData);
-
     return (
       <div className="tabs-block">
         <div className="tabs">
@@ -144,7 +144,7 @@ class Tabs extends PureComponent {
                       <td>{item.name}</td>
                       <td>{item.month}</td>
                       <td>{item.year}</td>
-                      <td>{item.points}</td>
+                      <td className="table-price">${item.points}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -163,13 +163,15 @@ class Tabs extends PureComponent {
                   </tr>
                 </thead>
                 <tbody>
-                  {Object.entries(rewardPoints).map(([key, value]) => (
-                    <tr key={key}>
-                      <td>{key}</td>
-                      <td>{value.name}</td>
-                      <td>{value.lastThreeMonths}</td>
-                    </tr>
-                  ))}
+                  {Object.entries(rewardPoints)
+                    .filter(([key, value]) => value.lastThreeMonths > 0)
+                    .map(([key, value]) => (
+                      <tr key={key}>
+                        <td>{key}</td>
+                        <td>{value.name}</td>
+                        <td className="table-price">${value.lastThreeMonths}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
@@ -191,14 +193,14 @@ class Tabs extends PureComponent {
                 </thead>
                 <tbody>
                   {this.state.data.map((item) => (
-                    <tr key={item.transactionId+item.customerId}>
+                    <tr key={item.transactionId + item.customerId}>
                       <td>{item.transactionId}</td>
                       <td>{item.customerId}</td>
                       <td>{item.name}</td>
                       <td>{item.date}</td>
                       <td>{item.product}</td>
-                      <td>{item.amount}</td>
-                      <td>{calculatePoints(item.amount)}</td>
+                      <td className="table-price">${item.amount}</td>
+                      <td className="table-price">${calculatePoints(item.amount)}</td>
                     </tr>
                   ))}
                 </tbody>
