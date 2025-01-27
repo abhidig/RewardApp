@@ -8,6 +8,7 @@ class Tabs extends PureComponent {
     data: [],
     filteredData: [],
     filter: { month: "All", year: "All" },
+    searchQuery: "",
   };
 
   componentDidMount() {
@@ -21,19 +22,21 @@ class Tabs extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState.data !== this.state.data ||
-      prevState.filter !== this.state.filter
+      prevState.filter !== this.state.filter ||
+      prevState.searchQuery !== this.state.searchQuery
     ) {
       const filtered = this.state.data.filter((item) => {
         const itemMonth = new Date(item.date).toLocaleString("default", {
           month: "long",
         });
         const itemYear = new Date(item.date).getFullYear().toString();
-        return (
-          (this.state.filter.month === "All" ||
-            itemMonth === this.state.filter.month) &&
-          (this.state.filter.year === "All" ||
-            itemYear === this.state.filter.year)
-        );
+        const matchesFilter =
+          (this.state.filter.month === "All" || itemMonth === this.state.filter.month) &&
+          (this.state.filter.year === "All" || itemYear === this.state.filter.year);
+        const matchesSearchQuery =
+          item.name.toLowerCase().includes(this.state.searchQuery.toLowerCase()) ||
+          item.customerId.toLowerCase().includes(this.state.searchQuery.toLowerCase());
+        return matchesFilter && matchesSearchQuery;
       });
       this.setState({ filteredData: filtered });
     }
@@ -49,10 +52,16 @@ class Tabs extends PureComponent {
       filter: { ...prevState.filter, [name]: value },
     }));
   };
+
+  handleSearchChange = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
   render() {
-    const { activeTab, filteredData, filter } = this.state;
+    const { activeTab, filteredData, filter,searchQuery } = this.state;
     const { rewardPoints, monthlyRewards } =
       calculateRewardPoints(filteredData);
+    
     return (
       <div className="tabs-block">
         <div className="tabs">
@@ -121,6 +130,14 @@ class Tabs extends PureComponent {
               <option value="2025">2025</option>
             </select>
           </label>
+          <label className="search-label">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={this.handleSearchChange}
+              placeholder="Search by name or ID"
+            />
+          </label>
         </div>
 
         <div className="tab-content">
@@ -186,7 +203,7 @@ class Tabs extends PureComponent {
                     <th>Customer Name</th>
                     <th>Purchase Date</th>
                     <th>Product Purchased</th>
-                    <th>Price</th>
+                    <th>Price ($)</th>
                     <th>Reward Points</th>
                   </tr>
                 </thead>
