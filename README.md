@@ -57,7 +57,7 @@ calculatePoints function
 
 **Assumption:- Application assumes that we have large data set and based on that we are processing the data and calculating the reward points.**
 
-![App Screenshot](https://infosystechnologies-my.sharepoint.com/my?id=%2Fpersonal%2Fabhijeet%5Fdighe%5Fad%5Finfosys%5Fcom%2FDocuments%2FAttachments%2Fs1%2Epng&parent=%2Fpersonal%2Fabhijeet%5Fdighe%5Fad%5Finfosys%5Fcom%2FDocuments%2FAttachments&ga=1)
+![App Screenshot](images/s1.png)
 ![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s2.png?Web=1)
 ![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s3.png?Web=1)
 
