@@ -57,12 +57,16 @@ calculatePoints function
 
 **Assumption:- Application assumes that we have large data set and based on that we are processing the data and calculating the reward points.**
 
-![App Screenshot](images/s1.png)
-![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s2.png?Web=1)
-![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s3.png?Web=1)
+![App Screenshot](https://drive.google.com/file/d/1WgPirKFO7tvOU75mh3VfSKdUCn4db0TA/view?usp=drivesdk)
+![App Screenshot](https://drive.google.com/file/d/15AoPB8rFoAR1_BhIEQijAYElsdxpOlKd/view?usp=drivesdk)
+![App Screenshot](https://drive.google.com/file/d/1hByLUi6KH9fppGmBpAwyQ26gAFDSUcHD/view?usp=drivesdk)
 
 
 ### Application error 
+
+![App Screenshot](https://drive.google.com/file/d/1b5NT31Q0gASzpFIjSDlPWy6DCSSPjEh4/view?usp=drivesdk)
+
+
 
 **We have created one component for error handling .**
 
