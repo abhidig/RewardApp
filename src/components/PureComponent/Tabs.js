@@ -2,6 +2,10 @@ import React, { PureComponent } from "react";
 import "../../CSS/Tabs.css";
 import { calculatePoints, calculateRewardPoints } from "../../utils/utils.js";
 import { fetchData } from "../../service/dataService.js";
+import Filter from "../FiltersComponent/Filter.js";
+import Tab from "../TabComponent/Tab.js";
+import Table from "../TableComponent/Table.js";
+
 class Tabs extends PureComponent {
   state = {
     activeTab: "tab1",
@@ -25,22 +29,27 @@ class Tabs extends PureComponent {
       prevState.filter !== this.state.filter ||
       prevState.searchQuery !== this.state.searchQuery
     ) {
-      const filtered = this.state.data.filter((item) => {
-        const itemMonth = new Date(item.date).toLocaleString("default", {
-          month: "long",
-        });
-        const itemYear = new Date(item.date).getFullYear().toString();
-        const matchesFilter =
-          (this.state.filter.month === "All" || itemMonth === this.state.filter.month) &&
-          (this.state.filter.year === "All" || itemYear === this.state.filter.year);
-        const matchesSearchQuery =
-          item.name.toLowerCase().includes(this.state.searchQuery.toLowerCase()) ||
-          item.customerId.toLowerCase().includes(this.state.searchQuery.toLowerCase());
-        return matchesFilter && matchesSearchQuery;
-      });
-      this.setState({ filteredData: filtered });
+      this.filterData();
     }
   }
+
+  filterData = () => {
+    const { data, filter, searchQuery } = this.state;
+    const filtered = data.filter((item) => {
+      const itemMonth = new Date(item.date).toLocaleString("default", {
+        month: "long",
+      });
+      const itemYear = new Date(item.date).getFullYear().toString();
+      const matchesFilter =
+        (filter.month === "All" || itemMonth === filter.month) &&
+        (filter.year === "All" || itemYear === filter.year);
+      const matchesSearchQuery =
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.customerId.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesFilter && matchesSearchQuery;
+    });
+    this.setState({ filteredData: filtered });
+  };
 
   handleTabChange = (event) => {
     this.setState({ activeTab: event.target.id });
@@ -58,170 +67,90 @@ class Tabs extends PureComponent {
   };
 
   render() {
-    const { activeTab, filteredData, filter,searchQuery } = this.state;
+    const { activeTab, filteredData, filter, searchQuery } = this.state;
     const { rewardPoints, monthlyRewards } =
       calculateRewardPoints(filteredData);
-    
+
+    const columns = {
+      tab1: [
+        { headerName: "Customer Id", field: "customerId" },
+        { headerName: "Customer Name", field: "name" },
+        { headerName: "Month", field: "month" },
+        { headerName: "Year", field: "year" },
+        { headerName: "Reward Points", field: "points", cellClass: "align-right" },
+      ],
+      tab2: [
+        { headerName: "Customer Id", field: "customerId" },
+        { headerName: "Customer Name", field: "name" },
+        {
+          headerName: "Last Three Months Reward",
+          field: "lastThreeMonthsRewards",
+          cellClass: "align-right"
+        },
+      ],
+      tab3: [
+        { headerName: "Transaction Id", field: "transactionId" },
+        { headerName: "Customer Id", field: "customerId" },
+        { headerName: "Customer Name", field: "name" },
+        { headerName: "Purchase Date", field: "date" },
+        { headerName: "Product Purchased", field: "product" },
+        { headerName: "Price ($)", field: "amount",cellClass: "align-right" },
+        { headerName: "Reward Points", field: "points",cellClass: "align-right" },
+      ],
+    };
+    const data = {
+      tab1: monthlyRewards,
+      tab2: Object.entries(rewardPoints)
+        .map(([key, value]) => ({
+          customerId: key,
+          name: value.name,
+          lastThreeMonthsRewards: value.lastThreeMonthsPoints,
+        }))
+        .filter((item) => item.lastThreeMonthsRewards > 0),
+      tab3: filteredData.map((item) => ({
+        ...item,
+        amount: parseFloat(item.amount).toFixed(2),
+        points: calculatePoints(item.amount),
+      })),
+    };
+
     return (
       <div className="tabs-block">
         <div className="tabs">
-          <input
-            type="radio"
-            name="tabs"
+          <Tab
             id="tab1"
-            checked={activeTab === "tab1"}
-            onChange={this.handleTabChange}
+            label="User Monthly Rewards"
+            activeTab={activeTab}
+            handleTabChange={this.handleTabChange}
           />
-          <label htmlFor="tab1">User Monthly Rewards</label>
-
-          <input
-            type="radio"
-            name="tabs"
+          <Tab
             id="tab2"
-            checked={activeTab === "tab2"}
-            onChange={this.handleTabChange}
+            label="Total Rewards"
+            activeTab={activeTab}
+            handleTabChange={this.handleTabChange}
           />
-          <label htmlFor="tab2">Total Rewards</label>
-
-          <input
-            type="radio"
-            name="tabs"
+          <Tab
             id="tab3"
-            checked={activeTab === "tab3"}
-            onChange={this.handleTabChange}
+            label="Transactions"
+            activeTab={activeTab}
+            handleTabChange={this.handleTabChange}
           />
-          <label htmlFor="tab3">Transactions</label>
         </div>
-        <div className="filters">
-          <label>
-            Month:
-            <select
-              name="month"
-              value={filter.month}
-              onChange={this.handleFilterChange}
-            >
-              <option value="All">All</option>
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
-            </select>
-          </label>
-          <label>
-            Year:
-            <select
-              name="year"
-              value={filter.year}
-              onChange={this.handleFilterChange}
-            >
-              <option value="All">All</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-            </select>
-          </label>
-          <label className="search-label">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={this.handleSearchChange}
-              placeholder="Search by name or ID"
-            />
-          </label>
-        </div>
-
+        <Filter
+          filter={filter}
+          searchQuery={searchQuery}
+          handleFilterChange={this.handleFilterChange}
+          handleSearchChange={this.handleSearchChange}
+        />
         <div className="tab-content">
           <div className={`tab ${activeTab === "tab1" ? "active" : ""}`}>
-            <div className="table-container">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Customer Id</th>
-                    <th>Customer Name</th>
-                    <th>Month</th>
-                    <th>Year</th>
-                    <th>Reward Points</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {monthlyRewards.map((item) => (
-                    <tr key={`${item.customerId}-${item.month}-${item.year}`}>
-                      <td>{item.customerId}</td>
-                      <td>{item.name}</td>
-                      <td>{item.month}</td>
-                      <td>{item.year}</td>
-                      <td className="table-price">${item.points}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table columns={columns.tab1} data={data.tab1} />
           </div>
-
           <div className={`tab ${activeTab === "tab2" ? "active" : ""}`}>
-            <div className="table-container">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Customer Id</th>
-                    <th>Customer Name</th>
-                    <th>Last Three Months Reward</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.entries(rewardPoints)
-                    .filter(([key, value]) => value.lastThreeMonths > 0)
-                    .map(([key, value]) => (
-                      <tr key={key}>
-                        <td>{key}</td>
-                        <td>{value.name}</td>
-                        <td className="table-price">${value.lastThreeMonths}</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
+            <Table columns={columns.tab2} data={data.tab2} />
           </div>
-
           <div className={`tab ${activeTab === "tab3" ? "active" : ""}`}>
-            <div className="table-container">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Transaction Id</th>
-                    <th>Customer Id</th>
-                    <th>Customer Name</th>
-                    <th>Purchase Date</th>
-                    <th>Product Purchased</th>
-                    <th>Price ($)</th>
-                    <th>Reward Points</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.data.map((item) => (
-                    <tr key={item.transactionId + item.customerId}>
-                      <td>{item.transactionId}</td>
-                      <td>{item.customerId}</td>
-                      <td>{item.name}</td>
-                      <td>{item.date}</td>
-                      <td>{item.product}</td>
-                      <td className="table-price">${item.amount}</td>
-                      <td className="table-price">${calculatePoints(item.amount)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Table columns={columns.tab3} data={data.tab3} />
           </div>
         </div>
       </div>

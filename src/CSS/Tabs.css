@@ -250,7 +250,7 @@ footer .credits {
   table-layout: auto; /* Allows columns to adjust based on content */
 }
 
-.table td.table-price {
+.table tr td.align-right {
   text-align: right;
   width: 150px; /* Adjust the width as needed */
   max-width: 150px; /* Ensure the column does not grow too large */

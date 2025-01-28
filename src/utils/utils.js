@@ -60,7 +60,7 @@ const calculateRewardPoints = (transactions) => {
          lastThreeMonthsPoints += customerRewards.monthly[year][month];
       }
     });
-    return customerRewards.lastThreeMonths = lastThreeMonthsPoints;
+    return customerRewards.lastThreeMonthsPoints = lastThreeMonthsPoints;
   });
 
   return { rewardPoints, monthlyRewards };

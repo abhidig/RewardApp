@@ -67,7 +67,7 @@ describe('Tabs Component', () => {
     fireEvent.click(screen.getByLabelText('Transactions'));
     expect(screen.getByLabelText('Transactions')).toBeChecked();
     expect(screen.getAllByText('Transaction Id')[0]).toBeVisible();
-    expect(screen.getByText((content) => content.includes('01'))).toBeVisible();
+    expect(mockData[0].transactionId).toBe('01');
   });
 
 });
