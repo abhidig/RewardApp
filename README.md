@@ -1,70 +1,111 @@
-# Getting Started with Create React App
+# Reward points calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project created using [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Problem statement
 
-In the project directory, you can run:
+A retailer offers a rewards program to its customers, awarding points based on each recorded purchase.  
 
-### `npm start`
+A customer receives 2 points for every dollar spent over $100 in each transaction, plus 1 point for every dollar spent between $50 and $100 in each transaction. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+(e.g. a $120 purchase = 2x$20 + 1x$50 = 90 points). 
+  
+Given a record of every transaction during a three month period, calculate the reward points earned for each customer per month and total. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Assumption:- The record could be of many years so displaying the records of the latest three months in descending order and combined points as per customer ID for the last three months.**
 
-### `npm test`
+## Running the project
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Clone the project from github repository
 
-### `npm run build`
+`https://github.com/abhidig/RewardApp`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Install the dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`npm install`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Run the app in development mode.
 
-### `npm run eject`
+### Run the app in development mode.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`npm run start`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Launch the test runner.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`npm run test`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The testcases file can be found in '/workspaces/Assign/src/RewardPointsCaluclator/_tests_/testCases.test.js'
 
-## Learn More
+ The code has passed below test cases
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+calculatePoints function
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ✓ renders User Monthly Rewards tab by default
 
-### Code Splitting
+    ✓ switches to Total Rewards tab
+    
+    ✓ switches to Transactions tab
+    
+    
+### Build the app for production to the `build` folder.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`npm run build`
 
-### Analyzing the Bundle Size
+## Screen shots of application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Application running state
 
-### Making a Progressive Web App
+**Assumption:- Application assumes that we have large data set and based on that we are processing the data and calculating the reward points.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s1.png?Web=1)
+![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s2.png?Web=1)
+![App Screenshot](https://infosystechnologies-my.sharepoint.com/personal/abhijeet_dighe_ad_infosys_com/Documents/Attachments/s3.png?Web=1)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Application error 
 
-### Deployment
+**We have created one component for error handling .**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Sample data
 
-### `npm run build` fails to minify
+To modify the json-server data, make changes to the file in public/data.json
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Here is some dummy data to illustrate the transaction records:
+
+```json
+[
+  {
+    "customerId": "C998",
+    "name": "Aaron Foster",
+    "date": "2023-07-03",
+    "month": "July",
+    "product": "Product K",
+    "amount": 162.6,
+    "transactionId": "T998"
+  },
+  {
+    "customerId": "C999",
+    "name": "Fiona Kelly",
+    "date": "2021-12-12",
+    "month": "December",
+    "product": "Product L",
+    "amount": 313.9,
+    "transactionId": "T999"
+  },
+  {
+    "customerId": "C1000",
+    "name": "Ethan James",
+    "date": "2022-08-04",
+    "month": "August",
+    "product": "Product M",
+    "amount": 138.92,
+    "transactionId": "T1000"
+  }
+]
+```
+
+
+
+## Credits
+List of contributors:
+- Abhijeet Dighe - Developer (abhijeet.dighe@infosys.com)
