@@ -58,8 +58,13 @@ calculatePoints function
 **Assumption:- Application assumes that we have large data set and based on that we are processing the data and calculating the reward points.**
 
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1WgPirKFO7tvOU75mh3VfSKdUCn4db0TA)
+
+
 ![App Screenshot](https://drive.google.com/uc?export=view&id=15AoPB8rFoAR1_BhIEQijAYElsdxpOlKd)
+
+
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1hByLUi6KH9fppGmBpAwyQ26gAFDSUcHD)
+
 
 ### Application error 
 
